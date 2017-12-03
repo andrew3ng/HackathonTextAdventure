@@ -8,12 +8,41 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import item.Item;
 import map.Map;
 import map.Place;
 
 public class Reader {
     /**
-     * Reads the main map
+     * Compiles list of all available, appropriate files to read from
+     * 
+     * @return
+     */
+    public static ArrayList<String> fileList() {
+
+        File dir = new File("." + "/gameData");
+        File[] listOfFiles = dir.listFiles(new FilenameFilter() {
+
+            @Override
+            public boolean accept(File dir, String name) {
+                String lowercaseName = name.toLowerCase();
+                return lowercaseName.endsWith(".txt");
+            }
+
+        });
+
+        ArrayList<String> fileList = new ArrayList<String>();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                fileList.add(listOfFiles[i].getName());
+            }
+        }
+        return fileList;
+    }
+
+    /**
+     * Reads and creates the whole map
      * 
      * @param file
      *            the file containing the main overworld
@@ -82,32 +111,34 @@ public class Reader {
         return map;
     }
 
-    public static ArrayList<String> fileList() {
+    public static void eventReader(String file) {
 
-        File dir = new File("." + "/gameData");
-        // System.out.println(dir.getPath());
-        File[] listOfFiles = dir.listFiles(new FilenameFilter() {
-
-            @Override
-            public boolean accept(File dir, String name) {
-                String lowercaseName = name.toLowerCase();
-                return lowercaseName.endsWith(".txt");
-            }
-
-        });
-
-        ArrayList<String> fileList = new ArrayList<String>();
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                // System.out.println("File: " + listOfFiles[i].getName());
-                fileList.add(listOfFiles[i].getName());
-            }
-            // else {
-            // System.out.println("Directory: " + listOfFiles[i].getName());
-            // }
-        }
-        return fileList;
     }
 
+    public static item.Item itemReader(String name, String file) {
+        item.Item item = null;
+        String[][] itemData = null;
+        try {
+            List<String> basicItemList = Files.readAllLines(Paths.get(file));
+            boolean badCall = true;
+            for (int i = 0; i < basicItemList.size(); i = i + 4) {
+                if (basicItemList.get(i).toLowerCase()
+                        .substring(0, basicItemList.get(i).indexOf(","))
+                        .contains(name)) {
+                    item = new Item(name);
+                    badCall = false;
+                }
+            }
+            if (badCall) {
+                System.out.println("Bad Call: Item does not exist");
+                return null;
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return item;
+    }
 }

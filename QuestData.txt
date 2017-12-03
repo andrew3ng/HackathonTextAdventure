@@ -1,0 +1,20 @@
+"Journey Beyond":
+-"What's beyond the horizon? Only one way to find out"
+-"distance > 0"
+>
+"Mortal Kombat":
+-"Finish Him!"
+-"encounters > 0 && victories > 0"
+>
+"Hoarder":
+-"I probably need this for later…"
+-"itemsPickedUp > 0"
+>
+"Socialist":
+-"Such social. Much chatter."
+-"npcsEncountered > 0"
+>
+"Quest Cruiser"
+-"In a rush much?"
+-"questsCompleted > 3"
+>

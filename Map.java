@@ -55,11 +55,11 @@ public class Map {
     public String toString() {
         String s = "";
         for (int i = 0; i < map.length; i++) {
-            s += "[";
+            s += "[ ";
             for (int j = 0; j < map[i].length - 1; j++) {
                 s += map[i][j].toString() + ", ";
             }
-            s += map[i][map[i].length - 1].toString() + "]\n";
+            s += map[i][map[i].length - 1].toString() + " ]\n";
         }
         return s;
     }

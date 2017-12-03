@@ -2,6 +2,8 @@ package map;
 
 import java.util.ArrayList;
 
+import player.Npc;
+
 public class Terrain {
 
     protected int x, y;

@@ -1,0 +1,16 @@
+Boat,(Key):
+-"It's a boat. I can use it to set sail"
+-waterTransport = true;
+>
+Torch,(Key):
+-"A torch. Better not burn myself"
+-darkTransport = true;
+>
+Knife,(Weapon):
+-"Dad's knife. It's quite sharp"
+-+5 Dam, 1.0 Acc, n/a
+>
+Gold Brand,():
+-"It's luster is quite underwhelming"
+-No Effect
+>
